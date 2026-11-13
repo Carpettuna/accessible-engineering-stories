@@ -23,8 +23,8 @@ import { projectSlugs } from "./src/content/project-slugs";
  * Vite's `base` also feeds TanStack Router's basepath, so every in-app link
  * and asset URL is prefixed automatically.
  */
-const staticExport = process.env.STATIC_EXPORT === "1";
-const basePath = process.env.BASE_PATH ?? "/";
+const staticExport = process.env["STATIC_EXPORT"] === "1";
+const basePath = process.env["BASE_PATH"] ?? "/";
 
 /** Every route the site can serve, so the Pages build writes a real HTML file for each. */
 const pages = [
@@ -40,11 +40,18 @@ export default defineConfig({
   vite: { base: basePath },
   tanstackStart: {
     pages,
-    prerender: staticExport
-      ? { enabled: true, autoStaticPathsDiscovery: false, crawlLinks: false }
-      : undefined,
+    // exactOptionalPropertyTypes: omit the option entirely when static export is off.
+    ...(staticExport
+      ? {
+          prerender: {
+            enabled: true,
+            autoStaticPathsDiscovery: false,
+            crawlLinks: false,
+          },
+        }
+      : {}),
   },
   // The Pages build needs no server: prerendered HTML plus the client bundle is
   // the whole site. Lovable's own build keeps its Cloudflare server bundle.
-  nitro: staticExport ? false : undefined,
+  ...(staticExport ? { nitro: false as const } : {}),
 });
