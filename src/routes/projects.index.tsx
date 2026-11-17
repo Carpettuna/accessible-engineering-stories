@@ -31,7 +31,7 @@ function ProjectsPage() {
         title="Projects"
         lead="Real projects from my university internships. Each case study follows the engineering process from problem definition to final outcome."
       />
-      <section className="py-16 md:py-24">
+      <section className="bg-surface-2 py-16 md:py-24">
         <div className="container-page grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {projects.map((p, i) => (
             <Reveal key={p.slug} delay={(i % 3) * 100}>

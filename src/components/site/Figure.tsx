@@ -5,7 +5,6 @@ import { cn } from "@/lib/utils";
 
 const kindLabel = { photo: "Photograph", cad: "CAD", drawing: "Drawing", test: "Testing" } as const;
 const kindIcon = { photo: Camera, cad: Box, drawing: PenTool, test: Ruler } as const;
-const kindTone = { photo: "text-accent", cad: "text-accent-warm", drawing: "text-accent", test: "text-accent-warm" } as const;
 
 /** One gallery image with caption. Items without `src` show a labelled placeholder frame. */
 export function Figure({ item, index, className }: { item: GalleryItem; index: number; className?: string }) {
@@ -24,7 +23,7 @@ export function Figure({ item, index, className }: { item: GalleryItem; index: n
           />
         ) : (
           <div className="blueprint flex size-full flex-col items-center justify-center gap-3 text-muted-foreground" role="img" aria-label={item.alt}>
-            <Icon className={cn("size-8", kindTone[item.kind])} aria-hidden />
+            <Icon className="size-8 text-accent" aria-hidden />
             <span className="eyebrow">{kindLabel[item.kind]} — coming soon</span>
           </div>
         )}

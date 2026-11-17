@@ -10,7 +10,7 @@ export function Logo() {
     <Link to="/" className="group flex items-center gap-3" aria-label={`${site.name} — home`}>
       <span
         aria-hidden
-        className="grid size-9 place-items-center rounded-sm bg-primary font-display text-sm font-bold text-primary-foreground transition-colors group-hover:bg-accent-warm"
+        className="grid size-9 place-items-center rounded-sm bg-primary font-display text-sm font-bold text-primary-foreground transition-colors group-hover:bg-accent"
       >
         {site.name
           .split(" ")
@@ -30,7 +30,6 @@ export function SiteHeader() {
 
   return (
     <header className="sticky top-0 z-40 border-b bg-background/85 backdrop-blur-md">
-      <div aria-hidden className="spectrum-rule h-0.5 w-full" />
       <div className="container-page flex h-16 items-center justify-between md:h-20">
         <Logo />
 

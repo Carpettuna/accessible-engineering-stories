@@ -15,7 +15,7 @@ export function SectionHeading({ index, eyebrow, title, lead, inverse, className
   return (
     <div className={cn("max-w-2xl", className)}>
       <p className={cn("eyebrow flex items-center gap-3", inverse ? "text-accent-soft" : "text-accent")}>
-        {index && <span className={inverse ? "text-accent-warm-bright" : "text-accent-warm"}>{index}</span>}
+        {index && <span>{index}</span>}
         <span aria-hidden className="h-px w-8 bg-current opacity-60" />
         <span>{eyebrow}</span>
       </p>

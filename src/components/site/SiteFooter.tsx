@@ -6,7 +6,6 @@ import { navItems, site } from "@/content/site";
 export function SiteFooter() {
   return (
     <footer className="border-t bg-inverse text-inverse-foreground">
-      <div aria-hidden className="spectrum-rule h-0.5 w-full" />
       <div className="container-page grid gap-10 py-14 md:grid-cols-[1.4fr_1fr_1fr]">
         <div>
           <p className="font-display text-xl font-semibold">{site.name}</p>

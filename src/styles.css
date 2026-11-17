@@ -10,7 +10,7 @@
 
 /*
  * Design system — "Industrial minimal"
- * Deep navy (primary), muted teal (accent), white and light grey surfaces.
+ * Deep navy (primary), muted teal (accent), white cards on cool teal-blue tinted bands.
  * Display: Archivo · Body: IBM Plex Sans · Technical labels: IBM Plex Mono
  */
 
@@ -42,10 +42,8 @@
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
   --color-accent-soft: var(--accent-soft);
-  --color-accent-warm: var(--accent-warm);
-  --color-accent-warm-foreground: var(--accent-warm-foreground);
-  --color-accent-warm-soft: var(--accent-warm-soft);
-  --color-accent-warm-bright: var(--accent-warm-bright);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
   --color-destructive: var(--destructive);
   --color-destructive-foreground: var(--destructive-foreground);
   --color-border: var(--border);
@@ -80,7 +78,8 @@
 :root {
   --radius: 0.25rem;
 
-  --background: oklch(0.992 0.002 240);
+  /* Pale cool ground */
+  --background: oklch(0.978 0.014 212);
   --foreground: oklch(0.23 0.045 258);
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.23 0.045 258);
@@ -91,30 +90,28 @@
   --primary: oklch(0.27 0.065 258);
   --primary-foreground: oklch(0.985 0.003 240);
 
-  /* Light grey */
-  --secondary: oklch(0.955 0.005 245);
+  /* Tinted section bands: teal surface, blue-grey surface */
+  --surface: oklch(0.935 0.032 212);
+  --surface-2: oklch(0.922 0.028 212);
+
+  /* Cool grey chips and fills */
+  --secondary: oklch(0.94 0.018 212);
   --secondary-foreground: oklch(0.27 0.065 258);
-  --muted: oklch(0.962 0.004 245);
-  --muted-foreground: oklch(0.5 0.025 255);
+  --muted: oklch(0.945 0.02 212);
+  --muted-foreground: oklch(0.45 0.028 220);
 
-  /* Muted teal */
-  --accent: oklch(0.54 0.075 196);
+  /* Muted teal — darkened so labels stay AA-legible on the tinted bands */
+  --accent: oklch(0.48 0.075 196);
   --accent-foreground: oklch(0.99 0.004 196);
-  --accent-soft: oklch(0.93 0.025 196);
-
-  /* Warm clay — secondary accent, used sparingly */
-  --accent-warm: oklch(0.55 0.11 68);
-  --accent-warm-foreground: oklch(0.99 0.004 78);
-  --accent-warm-soft: oklch(0.94 0.035 78);
-  --accent-warm-bright: oklch(0.8 0.1 78);
+  --accent-soft: oklch(0.92 0.035 196);
 
   --destructive: oklch(0.56 0.19 27);
   --destructive-foreground: oklch(0.985 0.003 240);
-  --border: oklch(0.905 0.008 248);
-  --input: oklch(0.88 0.01 248);
-  --ring: oklch(0.54 0.075 196);
+  --border: oklch(0.885 0.016 215);
+  --input: oklch(0.86 0.02 215);
+  --ring: oklch(0.48 0.075 196);
 
-  --inverse: oklch(0.22 0.05 258);
+  --inverse: oklch(0.21 0.05 250);
   --inverse-foreground: oklch(0.97 0.006 240);
   --inverse-muted: oklch(0.74 0.025 245);
   --inverse-border: oklch(0.36 0.045 258);
@@ -122,19 +119,19 @@
   --shadow-card: 0 1px 2px oklch(0.23 0.045 258 / 0.04), 0 8px 24px -12px oklch(0.23 0.045 258 / 0.12);
   --shadow-lift: 0 2px 4px oklch(0.23 0.045 258 / 0.05), 0 24px 48px -20px oklch(0.23 0.045 258 / 0.28);
 
-  --chart-1: oklch(0.54 0.075 196);
+  --chart-1: oklch(0.48 0.075 196);
   --chart-2: oklch(0.27 0.065 258);
-  --chart-3: oklch(0.55 0.11 68);
+  --chart-3: oklch(0.7 0.05 220);
   --chart-4: oklch(0.82 0.03 200);
   --chart-5: oklch(0.45 0.05 240);
-  --sidebar: oklch(0.985 0.003 240);
+  --sidebar: oklch(0.978 0.014 212);
   --sidebar-foreground: oklch(0.23 0.045 258);
   --sidebar-primary: oklch(0.27 0.065 258);
   --sidebar-primary-foreground: oklch(0.985 0.003 240);
-  --sidebar-accent: oklch(0.955 0.005 245);
+  --sidebar-accent: oklch(0.94 0.018 212);
   --sidebar-accent-foreground: oklch(0.27 0.065 258);
-  --sidebar-border: oklch(0.905 0.008 248);
-  --sidebar-ring: oklch(0.56 0.075 196);
+  --sidebar-border: oklch(0.885 0.016 215);
+  --sidebar-ring: oklch(0.48 0.075 196);
 }
 
 @layer base {
@@ -197,23 +194,11 @@
   }
 }
 
-/* Thin three-tone rule: navy → teal → clay */
-@utility spectrum-rule {
-  background-image: linear-gradient(90deg, var(--primary), var(--accent) 55%, var(--accent-warm));
-}
-
-/* Faint two-hue wash, sits under the blueprint grid in the intro band */
-@utility hero-wash {
-  background-image:
-    radial-gradient(60% 80% at 85% 8%, oklch(0.54 0.075 196 / 0.1), transparent 70%),
-    radial-gradient(55% 70% at 4% 96%, oklch(0.55 0.11 68 / 0.09), transparent 70%);
-}
-
 /* Faint blueprint grid */
 @utility blueprint {
   background-image:
-    linear-gradient(to right, oklch(0.27 0.065 258 / 0.05) 1px, transparent 1px),
-    linear-gradient(to bottom, oklch(0.27 0.065 258 / 0.05) 1px, transparent 1px);
+    linear-gradient(to right, oklch(0.48 0.075 200 / 0.09) 1px, transparent 1px),
+    linear-gradient(to bottom, oklch(0.48 0.075 200 / 0.09) 1px, transparent 1px);
   background-size: 32px 32px;
 }
 
@@ -222,6 +207,16 @@
     linear-gradient(to right, oklch(0.97 0.006 240 / 0.05) 1px, transparent 1px),
     linear-gradient(to bottom, oklch(0.97 0.006 240 / 0.05) 1px, transparent 1px);
   background-size: 32px 32px;
+}
+
+/* Blueprint grid plus a soft two-tone wash, so both layers survive on one element */
+@utility blueprint-wash {
+  background-image:
+    radial-gradient(70% 90% at 88% 0%, oklch(0.48 0.075 205 / 0.14), transparent 68%),
+    radial-gradient(60% 80% at 0% 100%, oklch(0.45 0.05 235 / 0.12), transparent 70%),
+    linear-gradient(to right, oklch(0.48 0.075 200 / 0.07) 1px, transparent 1px),
+    linear-gradient(to bottom, oklch(0.48 0.075 200 / 0.07) 1px, transparent 1px);
+  background-size: auto, auto, 32px 32px, 32px 32px;
 }
 
 /* Corner crop-marks around figures */

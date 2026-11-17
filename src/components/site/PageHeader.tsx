@@ -2,7 +2,7 @@ import type { ReactNode } from "react";
 
 export function PageHeader({ eyebrow, title, lead }: { eyebrow: string; title: ReactNode; lead?: ReactNode }) {
   return (
-    <section className="blueprint border-b">
+    <section className="blueprint-wash border-b bg-surface">
       <div className="container-page animate-rise py-16 md:py-24">
         <p className="eyebrow flex items-center gap-3 text-accent">
           <span aria-hidden className="h-px w-8 bg-current" />

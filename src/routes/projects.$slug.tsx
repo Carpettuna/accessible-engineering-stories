@@ -7,7 +7,6 @@ import { Reveal } from "@/components/site/Reveal";
 import { Button } from "@/components/ui/button";
 import { getProject, projects } from "@/content/projects";
 import { site } from "@/content/site";
-import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/projects/$slug")({
   loader: ({ params }) => {
@@ -63,7 +62,7 @@ function ProjectPage() {
 
   return (
     <article>
-      <header className="blueprint border-b">
+      <header className="blueprint-wash border-b bg-surface">
         <div className="container-page animate-rise py-12 md:py-20">
           <Link to="/projects" className="eyebrow inline-flex items-center gap-2 text-muted-foreground hover:text-foreground">
             <ArrowLeft className="size-3.5" aria-hidden /> All projects
@@ -90,7 +89,8 @@ function ProjectPage() {
         </div>
       </header>
 
-      <div className="container-page py-12 md:py-16">
+      <div className="bg-card py-12 md:py-16">
+        <div className="container-page">
         <figure className="crop-marks animate-rise [animation-delay:120ms]">
           <img
             src={project.cover.src}
@@ -102,17 +102,10 @@ function ProjectPage() {
         </figure>
 
         <dl className="mt-12 grid grid-cols-3 gap-px overflow-hidden rounded-md border bg-border">
-          {project.metrics.map((m, i) => (
+          {project.metrics.map((m) => (
             <div key={m.label} className="flex flex-col-reverse gap-1 bg-card p-5 md:p-8">
               <dt className="eyebrow text-[0.62rem] text-muted-foreground md:text-xs">{m.label}</dt>
-              <dd
-                className={cn(
-                  "font-display text-2xl font-semibold md:text-4xl",
-                  ["text-primary", "text-accent", "text-accent-warm"][i % 3],
-                )}
-              >
-                {m.value}
-              </dd>
+              <dd className="font-display text-2xl font-semibold text-primary md:text-4xl">{m.value}</dd>
             </div>
           ))}
         </dl>
@@ -123,9 +116,9 @@ function ProjectPage() {
           </Block>
           <Block n="02" title="User requirements">
             <ul className="space-y-3">
-              {project.requirements.map((r, i) => (
+              {project.requirements.map((r) => (
                 <li key={r} className="flex gap-3">
-                  <Check className={cn("mt-1 size-4 shrink-0", i % 2 ? "text-accent-warm" : "text-accent")} aria-hidden />
+                  <Check className="mt-1 size-4 shrink-0 text-accent" aria-hidden />
                   <span>{r}</span>
                 </li>
               ))}
@@ -138,9 +131,7 @@ function ProjectPage() {
             <ol className="space-y-6">
               {project.process.map((s, i) => (
                 <li key={s.title} className="grid grid-cols-[2rem_1fr] gap-2">
-                  <span className={cn("font-mono text-sm", i % 2 ? "text-accent-warm" : "text-accent")}>
-                    {String.fromCharCode(97 + i)}.
-                  </span>
+                  <span className="font-mono text-sm text-accent">{String.fromCharCode(97 + i)}.</span>
                   <div>
                     <h3 className="font-sans text-base font-semibold text-foreground">{s.title}</h3>
                     <p className="mt-1">{s.body}</p>
@@ -157,7 +148,7 @@ function ProjectPage() {
           </Block>
         </div>
 
-        <section className="border-t py-12 md:py-16" aria-labelledby="gallery-heading">
+        <section className="mt-10 rounded-md border bg-surface p-6 md:p-10" aria-labelledby="gallery-heading">
           <h2 id="gallery-heading" className="flex items-baseline gap-3 text-xl font-semibold">
             <span className="font-mono text-sm text-accent">07</span> Gallery, CAD & drawings
           </h2>
@@ -169,6 +160,7 @@ function ProjectPage() {
             ))}
           </div>
         </section>
+        </div>
       </div>
 
       {next && next.slug !== slug && (
@@ -182,10 +174,7 @@ function ProjectPage() {
               <p className="eyebrow text-inverse-muted">Next project</p>
               <p className="mt-2 font-display text-2xl font-semibold md:text-3xl">{next.title}</p>
             </div>
-            <ArrowRight
-              className="size-7 shrink-0 text-accent-warm-bright transition-transform group-hover:translate-x-1"
-              aria-hidden
-            />
+            <ArrowRight className="size-7 shrink-0 text-accent transition-transform group-hover:translate-x-1" aria-hidden />
           </div>
         </Link>
       )}
