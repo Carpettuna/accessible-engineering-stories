@@ -8,6 +8,7 @@ import { SectionHeading } from "@/components/site/SectionHeading";
 import { Button } from "@/components/ui/button";
 import { projects } from "@/content/projects";
 import { site } from "@/content/site";
+import { cn } from "@/lib/utils";
 
 const description =
   "Mechanical engineer designing wheelchair adaptations, accessibility solutions and custom assistive devices for people with disabilities.";
@@ -62,6 +63,7 @@ function HomePage() {
     <>
       {/* Intro */}
       <section className="blueprint relative overflow-hidden border-b">
+        <div aria-hidden className="hero-wash pointer-events-none absolute inset-0" />
         <div className="container-page grid items-center gap-12 py-16 md:py-24 lg:grid-cols-[1.05fr_1fr] lg:gap-16 lg:py-28">
           <div className="animate-rise">
             <p className="eyebrow flex items-center gap-3 text-accent">
@@ -87,10 +89,17 @@ function HomePage() {
                 { v: String(projects.length), l: "Case studies" },
                 { v: "2", l: "Internships" },
                 { v: "15+", l: "Users involved" },
-              ].map((s) => (
+              ].map((s, i) => (
                 <div key={s.l} className="flex flex-col-reverse gap-1">
                   <dt className="eyebrow text-[0.6rem] text-muted-foreground">{s.l}</dt>
-                  <dd className="font-display text-3xl font-semibold text-primary">{s.v}</dd>
+                  <dd
+                    className={cn(
+                      "font-display text-3xl font-semibold",
+                      ["text-primary", "text-accent", "text-accent-warm"][i % 3],
+                    )}
+                  >
+                    {s.v}
+                  </dd>
                 </div>
               ))}
             </dl>
@@ -131,7 +140,14 @@ function HomePage() {
           <div className="mt-14 grid gap-px overflow-hidden rounded-md border bg-border sm:grid-cols-2 lg:grid-cols-4">
             {focusAreas.map((f, i) => (
               <Reveal key={f.title} delay={i * 80} className="bg-card p-7">
-                <f.icon className="size-7 text-accent" aria-hidden strokeWidth={1.6} />
+                <span
+                  className={cn(
+                    "grid size-11 place-items-center rounded-sm",
+                    i % 2 ? "bg-accent-warm-soft text-accent-warm" : "bg-accent-soft text-accent",
+                  )}
+                >
+                  <f.icon className="size-5" aria-hidden strokeWidth={1.6} />
+                </span>
                 <h3 className="mt-6 text-lg font-semibold">{f.title}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{f.body}</p>
               </Reveal>
@@ -182,7 +198,9 @@ function HomePage() {
           <ol className="mt-14 grid gap-px overflow-hidden rounded-md border border-inverse-border bg-inverse-border sm:grid-cols-2 lg:grid-cols-5">
             {processSteps.map((s, i) => (
               <Reveal as="li" key={s.n} delay={i * 80} className="bg-inverse p-7">
-                <span className="font-mono text-sm text-accent">{s.n}</span>
+                <span className={cn("font-mono text-sm", i % 2 ? "text-accent-warm-bright" : "text-accent")}>
+                  {s.n}
+                </span>
                 <h3 className="mt-8 text-xl font-semibold">{s.title}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-inverse-muted">{s.body}</p>
               </Reveal>

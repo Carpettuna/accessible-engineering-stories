@@ -6,6 +6,7 @@ import { Reveal } from "@/components/site/Reveal";
 import { SectionHeading } from "@/components/site/SectionHeading";
 import { Button } from "@/components/ui/button";
 import { site } from "@/content/site";
+import { cn } from "@/lib/utils";
 
 const description = `About ${site.name}: mechanical engineering education, internship experience in rehabilitation engineering, and professional goals in assistive technology.`;
 
@@ -101,7 +102,7 @@ function AboutPage() {
                 className="grid gap-4 rounded-md border bg-card p-6 shadow-card md:grid-cols-[10rem_1fr] md:p-8"
               >
                 <div className="flex items-center gap-3 md:flex-col md:items-start">
-                  <t.icon className="size-5 text-accent" aria-hidden />
+                  <t.icon className={cn("size-5", i % 2 ? "text-accent-warm" : "text-accent")} aria-hidden />
                   <span className="font-mono text-sm text-muted-foreground">{t.period}</span>
                 </div>
                 <div>
@@ -120,8 +121,14 @@ function AboutPage() {
           <Reveal>
             <SectionHeading index="03" eyebrow="Interests" title="What I want to work on" />
             <ul className="mt-8 divide-y border-y">
-              {interests.map((i) => (
-                <li key={i} className="py-4">{i}</li>
+              {interests.map((i, n) => (
+                <li key={i} className="flex items-start gap-3 py-4">
+                  <span
+                    aria-hidden
+                    className={cn("mt-2 size-1.5 shrink-0 rounded-full", n % 2 ? "bg-accent-warm" : "bg-accent")}
+                  />
+                  {i}
+                </li>
               ))}
             </ul>
           </Reveal>

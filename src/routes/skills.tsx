@@ -4,6 +4,7 @@ import { PageHeader } from "@/components/site/PageHeader";
 import { Reveal } from "@/components/site/Reveal";
 import { skillGroups } from "@/content/skills";
 import { site } from "@/content/site";
+import { cn } from "@/lib/utils";
 
 const description =
   "CAD software, mechanical design, prototyping, fabrication, material selection and product development skills.";
@@ -36,11 +37,17 @@ function SkillsPage() {
             <Reveal key={g.title} delay={(i % 2) * 80} className="rounded-md border bg-card p-7 shadow-card md:p-9">
               <div className="flex items-baseline justify-between">
                 <h2 className="text-2xl font-semibold">{g.title}</h2>
-                <span className="font-mono text-sm text-accent">{g.code}</span>
+                <span className={cn("font-mono text-sm", i % 2 ? "text-accent-warm" : "text-accent")}>{g.code}</span>
               </div>
               <ul className="mt-6 flex flex-wrap gap-2">
                 {g.items.map((item) => (
-                  <li key={item} className="rounded-sm border bg-secondary px-3 py-1.5 text-sm">
+                  <li
+                    key={item}
+                    className={cn(
+                      "rounded-sm border px-3 py-1.5 text-sm",
+                      i % 2 ? "border-accent-warm/25 bg-accent-warm-soft" : "border-accent/25 bg-accent-soft",
+                    )}
+                  >
                     {item}
                   </li>
                 ))}

@@ -9,6 +9,7 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { buildMailto, contactSchema } from "@/lib/contact";
 import { site } from "@/content/site";
+import { cn } from "@/lib/utils";
 
 const description = `Contact ${site.name}, mechanical engineer in assistive technology — email, LinkedIn or contact form.`;
 
@@ -65,10 +66,10 @@ function ContactPage() {
               { icon: Mail, label: "Email", value: site.email, href: `mailto:${site.email}` },
               { icon: Linkedin, label: "LinkedIn", value: site.linkedinLabel, href: site.linkedin },
               { icon: MapPin, label: "Based in", value: site.location },
-            ].map((c) => {
+            ].map((c, i) => {
               const inner = (
                 <>
-                  <c.icon className="size-5 text-accent" aria-hidden />
+                  <c.icon className={cn("size-5", i % 2 ? "text-accent-warm" : "text-accent")} aria-hidden />
                   <span>
                     <span className="eyebrow block text-muted-foreground">{c.label}</span>
                     <span className="mt-1 block font-medium break-all">{c.value}</span>
@@ -80,7 +81,10 @@ function ContactPage() {
                   key={c.label}
                   href={c.href}
                   {...(c.href.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-                  className="flex items-start gap-4 rounded-md border bg-card p-6 shadow-card transition-colors hover:border-accent"
+                  className={cn(
+                    "flex items-start gap-4 rounded-md border bg-card p-6 shadow-card transition-colors",
+                    i % 2 ? "hover:border-accent-warm" : "hover:border-accent",
+                  )}
                 >
                   {inner}
                 </a>

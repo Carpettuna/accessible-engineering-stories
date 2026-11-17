@@ -7,6 +7,7 @@ import { Reveal } from "@/components/site/Reveal";
 import { Button } from "@/components/ui/button";
 import { getProject, projects } from "@/content/projects";
 import { site } from "@/content/site";
+import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/projects/$slug")({
   loader: ({ params }) => {
@@ -101,10 +102,17 @@ function ProjectPage() {
         </figure>
 
         <dl className="mt-12 grid grid-cols-3 gap-px overflow-hidden rounded-md border bg-border">
-          {project.metrics.map((m) => (
+          {project.metrics.map((m, i) => (
             <div key={m.label} className="flex flex-col-reverse gap-1 bg-card p-5 md:p-8">
               <dt className="eyebrow text-[0.62rem] text-muted-foreground md:text-xs">{m.label}</dt>
-              <dd className="font-display text-2xl font-semibold text-primary md:text-4xl">{m.value}</dd>
+              <dd
+                className={cn(
+                  "font-display text-2xl font-semibold md:text-4xl",
+                  ["text-primary", "text-accent", "text-accent-warm"][i % 3],
+                )}
+              >
+                {m.value}
+              </dd>
             </div>
           ))}
         </dl>
@@ -115,9 +123,9 @@ function ProjectPage() {
           </Block>
           <Block n="02" title="User requirements">
             <ul className="space-y-3">
-              {project.requirements.map((r) => (
+              {project.requirements.map((r, i) => (
                 <li key={r} className="flex gap-3">
-                  <Check className="mt-1 size-4 shrink-0 text-accent" aria-hidden />
+                  <Check className={cn("mt-1 size-4 shrink-0", i % 2 ? "text-accent-warm" : "text-accent")} aria-hidden />
                   <span>{r}</span>
                 </li>
               ))}
@@ -130,7 +138,9 @@ function ProjectPage() {
             <ol className="space-y-6">
               {project.process.map((s, i) => (
                 <li key={s.title} className="grid grid-cols-[2rem_1fr] gap-2">
-                  <span className="font-mono text-sm text-accent">{String.fromCharCode(97 + i)}.</span>
+                  <span className={cn("font-mono text-sm", i % 2 ? "text-accent-warm" : "text-accent")}>
+                    {String.fromCharCode(97 + i)}.
+                  </span>
                   <div>
                     <h3 className="font-sans text-base font-semibold text-foreground">{s.title}</h3>
                     <p className="mt-1">{s.body}</p>
@@ -172,7 +182,10 @@ function ProjectPage() {
               <p className="eyebrow text-inverse-muted">Next project</p>
               <p className="mt-2 font-display text-2xl font-semibold md:text-3xl">{next.title}</p>
             </div>
-            <ArrowRight className="size-7 shrink-0 text-accent transition-transform group-hover:translate-x-1" aria-hidden />
+            <ArrowRight
+              className="size-7 shrink-0 text-accent-warm-bright transition-transform group-hover:translate-x-1"
+              aria-hidden
+            />
           </div>
         </Link>
       )}
