@@ -10,7 +10,8 @@
 
 /*
  * Design system — "Industrial minimal"
- * Deep navy (primary), muted teal (accent), white cards on cool teal-blue tinted bands.
+ * Deep navy (primary), muted teal (accent), white cards on warm off-white and pale
+ * warm-grey bands, with one deep navy band for contrast.
  * Display: Archivo · Body: IBM Plex Sans · Technical labels: IBM Plex Mono
  */
 
@@ -78,8 +79,8 @@
 :root {
   --radius: 0.25rem;
 
-  /* Pale cool ground */
-  --background: oklch(0.978 0.014 212);
+  /* Warm off-white paper ground */
+  --background: oklch(0.985 0.005 85);
   --foreground: oklch(0.23 0.045 258);
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.23 0.045 258);
@@ -90,25 +91,25 @@
   --primary: oklch(0.27 0.065 258);
   --primary-foreground: oklch(0.985 0.003 240);
 
-  /* Tinted section bands: teal surface, blue-grey surface */
-  --surface: oklch(0.935 0.032 212);
-  --surface-2: oklch(0.922 0.028 212);
+  /* Pale warm-grey section bands */
+  --surface: oklch(0.955 0.01 80);
+  --surface-2: oklch(0.938 0.013 78);
 
-  /* Cool grey chips and fills */
-  --secondary: oklch(0.94 0.018 212);
+  /* Warm grey chips and fills */
+  --secondary: oklch(0.945 0.01 82);
   --secondary-foreground: oklch(0.27 0.065 258);
-  --muted: oklch(0.945 0.02 212);
-  --muted-foreground: oklch(0.45 0.028 220);
+  --muted: oklch(0.945 0.012 80);
+  --muted-foreground: oklch(0.45 0.018 70);
 
-  /* Muted teal — darkened so labels stay AA-legible on the tinted bands */
+  /* Muted teal — darkened so labels stay AA-legible on the warm bands */
   --accent: oklch(0.48 0.075 196);
   --accent-foreground: oklch(0.99 0.004 196);
   --accent-soft: oklch(0.92 0.035 196);
 
   --destructive: oklch(0.56 0.19 27);
   --destructive-foreground: oklch(0.985 0.003 240);
-  --border: oklch(0.885 0.016 215);
-  --input: oklch(0.86 0.02 215);
+  --border: oklch(0.885 0.012 80);
+  --input: oklch(0.86 0.014 80);
   --ring: oklch(0.48 0.075 196);
 
   --inverse: oklch(0.21 0.05 250);
@@ -121,16 +122,16 @@
 
   --chart-1: oklch(0.48 0.075 196);
   --chart-2: oklch(0.27 0.065 258);
-  --chart-3: oklch(0.7 0.05 220);
-  --chart-4: oklch(0.82 0.03 200);
-  --chart-5: oklch(0.45 0.05 240);
-  --sidebar: oklch(0.978 0.014 212);
+  --chart-3: oklch(0.7 0.03 75);
+  --chart-4: oklch(0.83 0.035 85);
+  --chart-5: oklch(0.45 0.02 60);
+  --sidebar: oklch(0.985 0.005 85);
   --sidebar-foreground: oklch(0.23 0.045 258);
   --sidebar-primary: oklch(0.27 0.065 258);
   --sidebar-primary-foreground: oklch(0.985 0.003 240);
-  --sidebar-accent: oklch(0.94 0.018 212);
+  --sidebar-accent: oklch(0.945 0.01 82);
   --sidebar-accent-foreground: oklch(0.27 0.065 258);
-  --sidebar-border: oklch(0.885 0.016 215);
+  --sidebar-border: oklch(0.885 0.012 80);
   --sidebar-ring: oklch(0.48 0.075 196);
 }
 
@@ -197,8 +198,8 @@
 /* Faint blueprint grid */
 @utility blueprint {
   background-image:
-    linear-gradient(to right, oklch(0.48 0.075 200 / 0.09) 1px, transparent 1px),
-    linear-gradient(to bottom, oklch(0.48 0.075 200 / 0.09) 1px, transparent 1px);
+    linear-gradient(to right, oklch(0.55 0.03 70 / 0.11) 1px, transparent 1px),
+    linear-gradient(to bottom, oklch(0.55 0.03 70 / 0.11) 1px, transparent 1px);
   background-size: 32px 32px;
 }
 
@@ -212,10 +213,10 @@
 /* Blueprint grid plus a soft two-tone wash, so both layers survive on one element */
 @utility blueprint-wash {
   background-image:
-    radial-gradient(70% 90% at 88% 0%, oklch(0.48 0.075 205 / 0.14), transparent 68%),
-    radial-gradient(60% 80% at 0% 100%, oklch(0.45 0.05 235 / 0.12), transparent 70%),
-    linear-gradient(to right, oklch(0.48 0.075 200 / 0.07) 1px, transparent 1px),
-    linear-gradient(to bottom, oklch(0.48 0.075 200 / 0.07) 1px, transparent 1px);
+    radial-gradient(70% 90% at 88% 0%, oklch(0.86 0.055 78 / 0.4), transparent 68%),
+    radial-gradient(60% 80% at 0% 100%, oklch(0.8 0.035 62 / 0.28), transparent 70%),
+    linear-gradient(to right, oklch(0.55 0.03 70 / 0.08) 1px, transparent 1px),
+    linear-gradient(to bottom, oklch(0.55 0.03 70 / 0.08) 1px, transparent 1px);
   background-size: auto, auto, 32px 32px, 32px 32px;
 }
 
